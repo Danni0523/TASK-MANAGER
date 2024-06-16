@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Task Manager</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center">Task Manager</h1>
+    <div id="app"></div>
+    <input type="text" id="taskInput" class="form-control mt-3" placeholder="Enter a new task">
+    <button id="addTaskBtn" class="btn btn-primary mt-2">Add Task</button>
+  </div>
+  <script src="js/model.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/controller.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const taskModel = new TaskModel();
+      const taskView = new TaskView();
+      const taskController = new TaskController(taskModel, taskView);
+
+      document.getElementById('addTaskBtn').addEventListener('click', () => {
+        const taskTitle = document.getElementById('taskInput').value;
+        if (taskTitle) {
+          taskController.addTask(taskTitle);
+          document.getElementById('taskInput').value = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
